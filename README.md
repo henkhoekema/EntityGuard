@@ -70,10 +70,6 @@ Gebruik vervolgens:
 https://github.com/henkhoekema/entityguard/blob/main/
 ```
 
-> Vervang de URL zodra de repository online staat.
-
----
-
 ## Methode 2 – YAML upload
 
 1. Download `entityguard.yaml`
