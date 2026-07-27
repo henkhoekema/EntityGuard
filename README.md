@@ -196,9 +196,7 @@ EntityGuard is ideaal voor situaties waarin betrouwbaarheid belangrijk is, zoals
 
 # 👨‍💻 Auteur
 
-**Henk**
-
-Ontwikkeld voor de Nederlandse Home Assistant-community.
+**Henk Hoekema**
 
 **Versie**
 
@@ -214,6 +212,6 @@ Verbeteringen, bugreports en pull requests zijn altijd welkom.
 
 # 📄 Licentie
 
-Vrij te gebruiken binnen de Home Assistant-community.
+Vrij te gebruiken maar wel op eigen risico.
 
-Gebruik op eigen risico.
+
