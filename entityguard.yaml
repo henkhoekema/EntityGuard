@@ -1,0 +1,252 @@
+blueprint:
+  name: EntityGuard
+  description: >
+    Voert een actie uit op een entity en controleert of de gewenste status
+    bereikt wordt. Inclusief retries, backoff, notificaties en logging.
+  domain: script
+  input:
+
+    description:
+      name: Omschrijving
+      description: Korte beschrijving voor logging en notificaties.
+      default: "EntityGuard actie"
+
+    entity_id:
+      name: Entity
+      description: De entity waarop de actie wordt uitgevoerd.
+      selector:
+        entity: {}
+
+    action:
+      name: Actie
+      description: >
+        De Home Assistant actie die uitgevoerd moet worden.
+        Voorbeeld: light.turn_on, switch.turn_off, cover.open_cover
+      selector:
+        text:
+
+    data:
+      name: Data
+      description: Optionele service-data die wordt meegestuurd.
+      default: {}
+      selector:
+        object:
+
+    retries:
+      name: Pogingen
+      description: Aantal pogingen om de gewenste state te bereiken.
+      default: 3
+      selector:
+        number:
+          min: 1
+          max: 20
+          mode: slider
+
+    timeout:
+      name: Timeout
+      description: Maximale tijd (seconden) voor de wait_template.
+      default: 15
+      selector:
+        number:
+          min: 1
+          max: 120
+          mode: slider
+
+    retry_delay:
+      name: Retry delay
+      description: Wachtduur tussen pogingen.
+      default: 5
+      selector:
+        number:
+          min: 1
+          max: 60
+          mode: slider
+
+    backoff_mode:
+      name: Backoff methode
+      description: Wachttijdverhoging tussen retries.
+      default: linear
+      selector:
+        select:
+          options:
+            - exponential
+            - linear
+            - constant
+
+    state_delay:
+      name: State delay
+      description: Wachtduur na actie voordat status wordt gecontroleerd.
+      default: 2
+      selector:
+        number:
+          min: 0
+          max: 10
+          mode: slider
+
+    notify:
+      name: Notificatie
+      description: Verstuur notificatie bij mislukking.
+      default: true
+      selector:
+        boolean:
+
+mode: queued
+
+sequence:
+
+  - variables:
+      description: !input description
+      entity_id: !input entity_id
+      action: !input action
+      data: !input data
+      retries: !input retries
+      timeout: !input timeout
+      retry_delay: !input retry_delay
+      backoff_mode: !input backoff_mode
+      state_delay: !input state_delay
+      notify: !input notify
+
+      domain: "{{ action.split('.')[0] }}"
+      action_name: "{{ action.split('.')[1] }}"
+      current_state: "{{ states(entity_id) }}"
+
+      supported_states: >
+        {% if domain in ['switch','light','input_boolean','fan','group','homeassistant','scene'] %}
+          ['on','off']
+        {% elif domain == 'cover' %}
+          ['open','closed','stopped']
+        {% elif domain == 'lock' %}
+          ['locked','unlocked']
+        {% elif domain == 'vacuum' %}
+          ['cleaning','paused','returning','docked']
+        {% elif domain == 'media_player' %}
+          ['on','off','playing','paused','idle']
+        {% elif domain == 'climate' %}
+          ['off','heat','cool','auto','dry','fan_only']
+        {% elif domain == 'humidifier' %}
+          ['on','off']
+        {% elif domain == 'dehumidifier' %}
+          ['on','off']
+        {% elif domain == 'water_heater' %}
+          ['on','off']
+        {% elif domain == 'alarm_control_panel' %}
+          ['armed_away','armed_home','armed_night','disarmed']
+        {% else %}
+          []
+        {% endif %}
+
+      start_time: "{{ now().timestamp() }}"
+
+      expected_state: >
+        {% if action_name == 'toggle' %}
+          {% if current_state == 'on' %}off
+          {% elif current_state == 'off' %}on
+          {% else %}unknown{% endif %}
+        {% else %}
+          {% if action_name == 'turn_on' %}on
+          {% elif action_name == 'turn_off' %}off
+          {% elif action_name == 'open_cover' %}open
+          {% elif action_name == 'close_cover' %}closed
+          {% elif action_name == 'stop_cover' %}stopped
+          {% elif action_name == 'lock' %}locked
+          {% elif action_name == 'unlock' %}unlocked
+          {% elif action_name == 'start' %}cleaning
+          {% elif action_name == 'pause' %}paused
+          {% elif action_name == 'return_to_base' %}returning
+          {% elif action_name == 'media_play' %}playing
+          {% elif action_name == 'media_pause' %}paused
+          {% elif action_name == 'media_stop' %}idle
+          {% elif action_name == 'set_hvac_mode' %}
+            {{ data.hvac_mode | default('unknown') }}
+          {% else %}unknown{% endif %}
+        {% endif %}
+
+  - if:
+      - condition: template
+        value_template: "{{ expected_state == 'unknown' }}"
+    then:
+      - stop: >
+          Onbekende actie. Controleer of de actie geldig is voor dit domein.
+
+  - if:
+      - condition: template
+        value_template: "{{ states(entity_id) in ['unknown','unavailable'] }}"
+    then:
+      - stop: >
+          Entity bestaat niet of is niet beschikbaar.
+
+  - if:
+      - condition: template
+        value_template: "{{ domain == 'scene' }}"
+    then:
+      - action: "{{ action }}"
+        target:
+          entity_id: "{{ entity_id }}"
+        data: "{{ data }}"
+      - stop: "Scene uitgevoerd (geen state-controle)"
+
+  - repeat:
+      count: "{{ retries }}"
+      sequence:
+
+        - action: "{{ action }}"
+          target:
+            entity_id: "{{ entity_id }}"
+          data: "{{ data }}"
+
+        - if:
+            - condition: template
+              value_template: "{{ state_delay > 0 }}"
+          then:
+            - delay:
+                seconds: "{{ state_delay }}"
+
+        - variables:
+            check_state: "{{ is_state(entity_id, expected_state) }}"
+
+        - wait_template: "{{ check_state }}"
+          timeout:
+            seconds: "{{ timeout }}"
+          continue_on_timeout: true
+
+        - if:
+            - condition: template
+              value_template: "{{ check_state }}"
+          then:
+            - stop: "Actie geslaagd."
+
+        - if:
+            - condition: template
+              value_template: "{{ repeat.index < retries }}"
+          then:
+            - delay:
+                seconds: >
+                  {% if backoff_mode == 'constant' %}
+                    {{ retry_delay }}
+                  {% elif backoff_mode == 'linear' %}
+                    {{ retry_delay * repeat.index }}
+                  {% elif backoff_mode == 'exponential' %}
+                    {{ retry_delay * (2 ** (repeat.index - 1)) }}
+                  {% else %}
+                    {{ retry_delay }}
+                  {% endif %}
+
+  - if:
+      - condition: template
+        value_template: "{{ notify }}"
+    then:
+      - action: notify.henk
+        data:
+          title: "⚠️ EntityGuard"
+          message: |
+            Omschrijving : {{ description }}
+            Entity       : {{ entity_id }}
+            Actie        : {{ action }}
+            Gewenst      : {{ expected_state }}
+            Pogingen     : {{ retries }}
+            Timeout      : {{ timeout }} sec
+            Resultaat    : MISLUKT
+          data:
+            ttl: 0
+            priority: high
+            clickAction: "noAction"
