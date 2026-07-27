@@ -67,7 +67,7 @@ Ga naar:
 Gebruik vervolgens:
 
 ```
-https://github.com/<jouw-gebruikersnaam>/<jouw-repository>/blob/main/entityguard.yaml
+https://github.com/henkhoekema/entityguard/blob/main/entityguard.yaml
 ```
 
 > Vervang de URL zodra de repository online staat.
