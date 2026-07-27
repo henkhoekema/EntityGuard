@@ -80,7 +80,7 @@ Met o.a.:
   Ideaal voor dashboards, Google Sheets of debugging.
 
 🧑‍💻 Auteur
-Blueprint gemaakt door Henk  
+Blueprint gemaakt door Henk Hoekema
 Home Assistant (NL) community
 
 📄 Licentie
