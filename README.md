@@ -1,4 +1,5 @@
-🏠 EntityGuard — Home Assistant Script Blueprint
+🏠 EntityGuard
+Home Assistant Script Blueprint
 Een krachtige, betrouwbare script‑blueprint voor Home Assistant die acties uitvoert op entities
 en controleert of de gewenste status daadwerkelijk wordt bereikt.
 Inclusief retries, backoff‑logica, state‑delay, notificaties en uitgebreide logging.
