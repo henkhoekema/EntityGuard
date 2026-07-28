@@ -214,15 +214,15 @@ EntityGuard is ideaal voor situaties waarin betrouwbaarheid belangrijk is, zoals
 **Versie**
 
 `v2026.7.3`
----
-
-[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/henkhoekema)
 
 ---
 
 # 🤝 Bijdragen
 
 Verbeteringen, bugreports en pull requests zijn altijd welkom.
+---
+
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/henkhoekema)
 
 ---
 
