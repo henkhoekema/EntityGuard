@@ -1,14 +1,29 @@
-# 🏠 EntityGuard
-
-### Betrouwbaar Home Assistant Script
-
 ![Home Assistant](https://img.shields.io/badge/Home%20Assistant-2026%2B-blue.svg)
 ![Script](https://img.shields.io/badge/Home%20Assistant-Script-success.svg)
 ![License](https://img.shields.io/badge/License-Community-green.svg)
 
-**EntityGuard** is een krachtig **Home Assistant-script** dat acties uitvoert op entities en vervolgens controleert of de gewenste status daadwerkelijk is bereikt.
+# 🏠 EntityGuard
 
-Wanneer een actie mislukt, probeert EntityGuard deze automatisch opnieuw uit te voeren volgens een instelbare retry- en backoff-strategie. Daarnaast ondersteunt het script uitgebreide logging, notificaties en event-uitvoer, waardoor het ideaal is voor betrouwbare automatiseringen.
+### Betrouwbaar Home Assistant Script
+
+De afgelopen tijd heb ik, als pensionado, een slim hulpje voor Home Assistant ontwikkeld. Je moet toch wat... 😉.
+
+Dat hulpje heet **EntityGuard**.
+
+Iedere Home Assistant-gebruiker kent het wel: je geeft een apparaat de opdracht om iets te doen, maar om de één of andere reden gebeurt er niets. Je zegt bijvoorbeeld: *"Ga aan!"*, maar de lamp, schakelaar of ventilator lijkt je compleet te negeren.
+
+Normaal gesproken gaat Home Assistant ervan uit dat de opdracht succesvol is verzonden. Of het apparaat de opdracht ook daadwerkelijk heeft uitgevoerd, wordt niet altijd gecontroleerd.
+
+**EntityGuard** doet dat wél.
+
+Na iedere actie controleert het script of het apparaat daadwerkelijk de gewenste status heeft bereikt. Is dat niet het geval, dan probeert EntityGuard de opdracht automatisch opnieuw uit te voeren. Daarbij kan het meerdere pogingen doen, met een instelbare wachttijd en verschillende backoff-strategieën tussen de pogingen.
+
+Lukt het uiteindelijk nog steeds niet? Dan kan EntityGuard een notificatie versturen én wordt precies vastgelegd wat er is gebeurd. Dankzij de uitgebreide logging kun je achteraf eenvoudig zien welke actie is uitgevoerd, hoe lang deze duurde, hoeveel pogingen nodig waren en waarom een actie eventueel is mislukt.
+
+EntityGuard werkt met een groot aantal Home Assistant-domeinen, waaronder verlichting, schakelaars, ventilatoren, covers, sloten, media-spelers, scènes en nog veel meer. Nieuwe domeinen en extra controles zijn bovendien eenvoudig toe te voegen.
+
+Kortom: **EntityGuard zorgt ervoor dat Home Assistant niet direct opgeeft wanneer een apparaat even koppig doet.** Het is een flexibel script met veel instellingen en mogelijkheden om je automatiseringen betrouwbaarder te maken.
+
 
 ---
 
