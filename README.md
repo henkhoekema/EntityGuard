@@ -207,6 +207,84 @@ EntityGuard is ideaal voor situaties waarin betrouwbaarheid belangrijk is, zoals
 
 ---
 
+---
+
+# 💭 Developer's Note
+
+## Waarom EntityGuard een script is en geen kant-en-klare integratie
+
+EntityGuard is bewust ontwikkeld als een **Home Assistant-script** en niet als een plug-and-play integratie. Niet omdat het technisch onmogelijk is, maar omdat ik geloof dat Home Assistant meer is dan alleen een verzameling kant-en-klare oplossingen.
+
+Home Assistant is voor mij geen app-store, maar een gereedschapskist. Juist het begrijpen van je eigen automatiseringen maakt het platform zo krachtig.
+
+Daarom is EntityGuard ontworpen als gereedschap, niet als een afgesloten product.
+
+Met EntityGuard:
+
+* zie je wat er gebeurt;
+* begrijp je de achterliggende logica;
+* kun je het script aanpassen;
+* kun je het uitbreiden;
+* kun je het debuggen;
+* en kun je het verder verbeteren.
+
+Een volledig afgeschermde integratie zou veel van die mogelijkheden verbergen. Dat past niet bij de filosofie achter dit project.
+
+---
+
+## AI is een hulpmiddel, geen vervanging voor inzicht
+
+Moderne AI-tools zoals ChatGPT, Claude en Copilot zijn uitstekende hulpmiddelen bij het schrijven van code, het uitleggen van YAML of het bedenken van oplossingen.
+
+Maar uiteindelijk kent AI jouw Home Assistant-omgeving niet.
+
+AI weet bijvoorbeeld niet:
+
+* hoe jouw Zigbee-netwerk zich gedraagt;
+* welke WiFi-vertragingen je soms hebt;
+* welke apparaten af en toe een statusupdate missen;
+* welke uitzonderingen jouw automatiseringen bevatten;
+* waarom een bepaalde lamp nét iets later reageert dan verwacht.
+
+Dat zijn ervaringen die alleen ontstaan door testen, meten, aanpassen en opnieuw proberen.
+
+Juist daar ligt de kracht van Home Assistant.
+
+---
+
+## Waarom ik voor scripts kies
+
+Een script laat zien wat er gebeurt.
+
+Je kunt iedere regel bekijken, begrijpen en aanpassen aan je eigen situatie. Daardoor leer je niet alleen hoe EntityGuard werkt, maar ook hoe Home Assistant zelf werkt.
+
+Met een script kun je:
+
+* begrijpen wat er gebeurt;
+* fouten opsporen;
+* optimaliseren;
+* uitbreiden;
+* experimenteren;
+* en nieuwe ideeën uitproberen.
+
+Dat maakt je niet alleen gebruiker van Home Assistant, maar ook bouwer.
+
+---
+
+## Uiteindelijk gaat het om plezier
+
+Home Assistant draait voor mij niet alleen om domotica, maar ook om nieuwsgierigheid.
+
+Het is leuk om te experimenteren, te testen, te bouwen en stap voor stap iets beter te maken.
+
+EntityGuard is vanuit die gedachte ontstaan.
+
+Niet als een gesloten oplossing die alles voor je doet, maar als een hulpmiddel dat je kunt begrijpen, aanpassen en verder ontwikkelen.
+
+Ik hoop dat het je niet alleen helpt om betrouwbaardere automatiseringen te bouwen, maar je ook inspireert om zelf verder te experimenteren.
+
+---
+
 # 👨‍💻 Auteur
 
 **Henk Hoekema**
