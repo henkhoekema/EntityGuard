@@ -293,6 +293,8 @@ Ik hoop dat het je niet alleen helpt om betrouwbaardere automatiseringen te bouw
 
 `v2026.7.3`
 
+[<img src="coffee.png" width="300">](https://paypal.me/henkhoekema)
+
 ---
 
 # 🤝 Bijdragen
