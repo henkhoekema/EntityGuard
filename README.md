@@ -297,7 +297,7 @@ Ik hoop dat het je niet alleen helpt om betrouwbaardere automatiseringen te bouw
 
 # 🤝 Bijdragen
 
-Verbeteringen, bugreports en pull requests zijn altijd welkom.
+Home Assistant draait om samen bouwen en van elkaar leren. Ook ik heb niet alle wijsheid in pacht. Daarom zijn ideeën, verbeteringen, bugreports en pull requests altijd van harte welkom.
 
 ---
 
