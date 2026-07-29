@@ -1,2 +1,5 @@
 buy_me_a_coffee: henkhoekema
-custom: ["https://buymeacoffee.com/henkhoekema"]
+custom:
+  - "https://buymeacoffee.com/henkhoekema"
+  - "https://paypal.me/henkhoekema"
+
