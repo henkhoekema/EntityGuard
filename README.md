@@ -6,7 +6,7 @@
 > [!TIP]
 > **EntityGuard documentation is available in two languages.**
 >
-> 🇬🇧 **English** (current page) • 🇳🇱 **[Nederlandse versie](README.nl.md)**
+> 🇬🇧 **English** (current page) • 🇳🇱 **[Nederlandse versie](Readme.nl.md)**
 
 
 # 🏠 EntityGuard
