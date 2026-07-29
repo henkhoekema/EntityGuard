@@ -2,95 +2,101 @@
 ![Script](https://img.shields.io/badge/Home%20Assistant-Script-success.svg)
 ![License](https://img.shields.io/badge/License-Community-green.svg)
 
+
+> [!TIP]
+> **EntityGuard documentation is available in two languages.**
+>
+> 🇬🇧 **English** (current page) • 🇳🇱 **[Nederlandse versie](README.nl.md)**
+
+
 # 🏠 EntityGuard
 
-### Betrouwbaar Home Assistant Script
+### Reliable Home Assistant Script
 
-De afgelopen tijd heb ik, als pensionado, een slim hulpje voor Home Assistant ontwikkeld. Je moet toch wat... 😉.
+Over the past months, I developed a small script for Home Assistant. You have to keep yourself busy somehow. 😉
 
-Dat hulpje heet **EntityGuard**.
+That script is called **EntityGuard**.
 
-Iedere Home Assistant-gebruiker kent het wel: je geeft een apparaat de opdracht om iets te doen, maar om de één of andere reden gebeurt er niets. Je zegt bijvoorbeeld: *"Ga aan!"*, maar de lamp, schakelaar of ventilator lijkt je compleet te negeren.
+Every Home Assistant user has experienced it at some point: you tell a device to do something, but for one reason or another... nothing happens. You tell a light, switch, or fan to turn on, yet it simply ignores the command.
 
-Normaal gesproken gaat Home Assistant ervan uit dat de opdracht succesvol is verzonden. Of het apparaat de opdracht ook daadwerkelijk heeft uitgevoerd, wordt niet altijd gecontroleerd.
+Normally, Home Assistant assumes that once a service call has been sent, the job is done. Whether the device actually performed the requested action is not always verified.
 
-**EntityGuard** doet dat wél.
+**EntityGuard** changes that.
 
-Na iedere actie controleert het script of het apparaat daadwerkelijk de gewenste status heeft bereikt. Is dat niet het geval, dan probeert EntityGuard de opdracht automatisch opnieuw uit te voeren. Daarbij kan het meerdere pogingen doen, met een instelbare wachttijd en verschillende backoff-strategieën tussen de pogingen.
+After every action, the script verifies that the device has actually reached the requested state. If it hasn't, EntityGuard automatically retries the action. It supports multiple retry attempts, configurable delays, and different backoff strategies between attempts.
 
-Lukt het uiteindelijk nog steeds niet? Dan kan EntityGuard een notificatie versturen én wordt precies vastgelegd wat er is gebeurd. Dankzij de uitgebreide logging kun je achteraf eenvoudig zien welke actie is uitgevoerd, hoe lang deze duurde, hoeveel pogingen nodig waren en waarom een actie eventueel is mislukt.
+If the action still fails, EntityGuard can send a notification and records exactly what happened. Thanks to extensive logging, you can easily see which action was executed, how long it took, how many attempts were required, and why it ultimately failed.
 
-EntityGuard werkt met een groot aantal Home Assistant-domeinen, waaronder verlichting, schakelaars, ventilatoren, covers, sloten, media-spelers, scènes en nog veel meer. Nieuwe domeinen en extra controles zijn bovendien eenvoudig toe te voegen.
+EntityGuard supports a wide range of Home Assistant domains, including lights, switches, fans, covers, locks, media players, scenes, and many more. Adding new domains or additional state checks is straightforward.
 
-Kortom: **EntityGuard zorgt ervoor dat Home Assistant niet direct opgeeft wanneer een apparaat even koppig doet.** Het is een flexibel script met veel instellingen en mogelijkheden om je automatiseringen betrouwbaarder te maken.
-
+In short: **EntityGuard makes sure Home Assistant doesn't give up when a device decides to be stubborn.** It is a flexible, highly configurable script designed to make your automations significantly more reliable.
 
 ---
 
-# 📑 Inhoud
+# 📑 Contents
 
-* [✨ Functionaliteit](#-functionaliteit)
-* [📦 Installatie](#-installatie)
-* [🧩 Ondersteunde domeinen](#-ondersteunde-domeinen)
+* [✨ Features](#-features)
+* [📦 Installation](#-installation)
+* [🧩 Supported Domains](#-supported-domains)
 * [⚙️ Parameters](#️-parameters)
-* [🚀 Voorbeeld](#-voorbeeld)
+* [🚀 Example](#-example)
 * [📡 Logging](#-logging)
-* [💡 Toepassingen](#-toepassingen)
-* [👨‍💻 Auteur](#-auteur)
-* [📄 Licentie](#-licentie)
+* [💡 Use Cases](#-use-cases)
+* [👨‍💻 Author](#-author)
+* [📄 License](#-license)
 
 ---
 
-# ✨ Functionaliteit
+# ✨ Features
 
-✅ Voert een actie uit op een ondersteunde entity
+✅ Executes an action on a supported entity
 
-✅ Controleert of de gewenste eindstatus daadwerkelijk is bereikt
+✅ Verifies that the requested state has actually been reached
 
-✅ Probeert automatisch opnieuw bij mislukking (Retries)
+✅ Automatically retries failed actions
 
-✅ Ondersteunt meerdere backoff-methoden
+✅ Supports multiple backoff strategies
 
 * Linear
 * Constant
 * Exponential
 
-✅ Ondersteunt een instelbare **State Delay**
+✅ Configurable **State Delay**
 
-✅ Optionele notificatie bij mislukte uitvoering
+✅ Optional notification when execution fails
 
-✅ Stuurt een event (`entityguard_klaar`) met alle resultaten
+✅ Fires an `entityguard_done` event containing detailed results
 
-✅ Geschikt voor logging naar bijvoorbeeld:
+✅ Suitable for logging to:
 
 * Google Sheets
 * Dashboards
 * Grafana
-* Eigen automatiseringen
+* Custom automations
 
-✅ Compatibel met moderne Home Assistant Actions (2026+)
+✅ Compatible with modern Home Assistant Actions (2026+)
 
 ---
 
-# 📦 Installatie
+# 📦 Installation
 
-1. Download het bestand `entityguard.yaml` uit deze repository.
+1. Download `entityguard.yaml` from this repository.
 
-2. Plaats het bestand in de map:
+2. Copy the file to:
 
 ```text
 /config/scripts/
 ```
 
-3. Voeg het script toe aan je `scripts.yaml`, of neem de inhoud op in je bestaande scriptconfiguratie.
+3. Add the script to your `scripts.yaml`, or merge its contents into your existing script configuration.
 
-4. Herlaad de scripts via:
+4. Reload your scripts via:
 
-> **Settings → Developer tools → YAML configuration reloading → Scripts**
+> **Settings → Developer Tools → YAML Configuration Reloading → Scripts**
 
-of herstart Home Assistant.
+or simply restart Home Assistant.
 
-Na het herladen is het script beschikbaar als:
+After reloading, the script will be available as:
 
 ```text
 script.entityguard
@@ -98,9 +104,9 @@ script.entityguard
 
 ---
 
-# 🧩 Ondersteunde domeinen
+# 🧩 Supported Domains
 
-EntityGuard ondersteunt onder andere:
+EntityGuard currently supports, among others:
 
 * switch
 * light
@@ -119,34 +125,34 @@ EntityGuard ondersteunt onder andere:
 * water_heater
 * alarm_control_panel
 
-Nieuwe Home Assistant-domeinen kunnen eenvoudig worden toegevoegd.
+Additional Home Assistant domains can easily be added.
 
 ---
 
 # ⚙️ Parameters
 
-| Parameter      | Beschrijving                                | Default  |
-| -------------- | ------------------------------------------- | -------- |
-| `description`  | Korte omschrijving voor logging             | —        |
-| `entity_id`    | Entity waarop de actie wordt uitgevoerd     | —        |
-| `action`       | Uit te voeren actie (bijv. `light.turn_on`) | —        |
-| `data`         | Optionele service-data                      | `{}`     |
-| `retries`      | Maximum aantal pogingen                     | `3`      |
-| `timeout`      | Wachttijd per poging                        | `15 sec` |
-| `retry_delay`  | Basis wachttijd tussen pogingen             | `5 sec`  |
-| `backoff_mode` | Linear / Constant / Exponential             | `linear` |
-| `state_delay`  | Wachttijd vóór statuscontrole               | `2 sec`  |
-| `notify`       | Verstuur notificatie bij mislukking         | `true`   |
+| Parameter      | Description                              | Default  |
+| -------------- | ---------------------------------------- | -------- |
+| `description`  | Short description used for logging       | —        |
+| `entity_id`    | Target entity                            | —        |
+| `action`       | Action to execute (e.g. `light.turn_on`) | —        |
+| `data`         | Optional service data                    | `{}`     |
+| `retries`      | Maximum retry attempts                   | `3`      |
+| `timeout`      | Timeout per attempt                      | `15 sec` |
+| `retry_delay`  | Base delay between retries               | `5 sec`  |
+| `backoff_mode` | Linear / Constant / Exponential          | `linear` |
+| `state_delay`  | Delay before checking the state          | `2 sec`  |
+| `notify`       | Send notification if execution fails     | `true`   |
 
 ---
 
-# 🚀 Voorbeeld
+# 🚀 Example
 
 ```yaml
 action:
   - action: script.entityguard
     data:
-      description: "Lamp woonkamer aan"
+      description: "Living room light on"
       entity_id: light.erker_licht
       action: light.turn_on
       retries: 3
@@ -159,137 +165,135 @@ action:
 
 # 📡 Logging
 
-Na iedere uitvoering wordt automatisch een event verstuurd:
+After every execution, EntityGuard automatically fires the following event:
 
 ```text
-entityguard_klaar
+entityguard_done
 ```
 
-Dit event bevat onder andere:
+The event includes, among others:
 
-| Variabele      | Omschrijving                         |
-| -------------- | ------------------------------------ |
-| `description`  | Omschrijving van de actie            |
-| `entity`       | Uitgevoerde entity                   |
-| `action`       | Uitgevoerde Home Assistant action    |
-| `result`       | OK of MISLUKT                        |
-| `duration`     | Totale duur van de uitvoering        |
-| `poging`       | Poging waarop de actie succesvol was |
-| `retries`      | Maximaal aantal retries              |
-| `timeout`      | Ingestelde timeout                   |
-| `state_delay`  | Wachttijd voor statuscontrole        |
-| `backoff_mode` | Gebruikte backoff-methode            |
+| Variable       | Description                     |
+| -------------- | ------------------------------- |
+| `description`  | Action description              |
+| `entity`       | Target entity                   |
+| `action`       | Executed Home Assistant action  |
+| `result`       | OK or FAILED                    |
+| `duration`     | Total execution time            |
+| `attempt`      | Successful attempt number       |
+| `retries`      | Maximum retries configured      |
+| `timeout`      | Configured timeout              |
+| `state_delay`  | Delay before state verification |
+| `backoff_mode` | Backoff strategy used           |
 
-Deze informatie kan direct worden gebruikt voor:
+This information can easily be used for:
 
 * Google Sheets logging
 * Dashboards
-* Statistieken
+* Statistics
 * Debugging
 * Monitoring
-* Automatiseringen
+* Custom automations
 
 ---
 
-# 💡 Toepassingen
+# 💡 Use Cases
 
-EntityGuard is ideaal voor situaties waarin betrouwbaarheid belangrijk is, zoals:
+EntityGuard is especially useful for automations where reliability matters:
 
-* Slimme verlichting
-* Rolluiken
-* Deursloten
-* HVAC-installaties
-* Ventilatie
-* Alarmsystemen
-* Pompen
-* Media-apparatuur
-* Kritieke automatiseringen
-
----
+* Smart lighting
+* Roller shutters
+* Door locks
+* HVAC systems
+* Ventilation
+* Alarm systems
+* Pumps
+* Media equipment
+* Mission-critical automations
 
 ---
 
 # 💭 Developer's Note
 
-## Waarom EntityGuard een script is en geen kant-en-klare integratie
+## Why EntityGuard is a script instead of a plug-and-play integration
 
-EntityGuard is bewust ontwikkeld als een **Home Assistant-script** en niet als een plug-and-play integratie. Niet omdat het technisch onmogelijk is, maar omdat ik geloof dat Home Assistant meer is dan alleen een verzameling kant-en-klare oplossingen.
+EntityGuard was intentionally designed as a **Home Assistant script**, not as a plug-and-play integration. Not because an integration isn't possible, but because I believe Home Assistant is more than a collection of ready-made solutions.
 
-Home Assistant is voor mij geen app-store, maar een gereedschapskist. Juist het begrijpen van je eigen automatiseringen maakt het platform zo krachtig.
+To me, Home Assistant is a toolbox rather than an app store. Understanding your own automations is what makes the platform truly powerful.
 
-Daarom is EntityGuard ontworpen als gereedschap, niet als een afgesloten product.
+That's why EntityGuard is built as a tool—not a black box.
 
-Met EntityGuard:
+With EntityGuard you can:
 
-* zie je wat er gebeurt;
-* begrijp je de achterliggende logica;
-* kun je het script aanpassen;
-* kun je het uitbreiden;
-* kun je het debuggen;
-* en kun je het verder verbeteren.
+* see exactly what happens;
+* understand the underlying logic;
+* modify the script;
+* extend it;
+* debug it;
+* improve it.
 
-Een volledig afgeschermde integratie zou veel van die mogelijkheden verbergen. Dat past niet bij de filosofie achter dit project.
-
----
-
-## AI is een hulpmiddel, geen vervanging voor inzicht
-
-Moderne AI-tools zoals ChatGPT, Claude en Copilot zijn uitstekende hulpmiddelen bij het schrijven van code, het uitleggen van YAML of het bedenken van oplossingen.
-
-Maar uiteindelijk kent AI jouw Home Assistant-omgeving niet.
-
-AI weet bijvoorbeeld niet:
-
-* hoe jouw Zigbee-netwerk zich gedraagt;
-* welke WiFi-vertragingen je soms hebt;
-* welke apparaten af en toe een statusupdate missen;
-* welke uitzonderingen jouw automatiseringen bevatten;
-* waarom een bepaalde lamp nét iets later reageert dan verwacht.
-
-Dat zijn ervaringen die alleen ontstaan door testen, meten, aanpassen en opnieuw proberen.
-
-Juist daar ligt de kracht van Home Assistant.
+A fully packaged integration would hide much of that. That doesn't fit the philosophy behind this project.
 
 ---
 
-## Waarom ik voor scripts kies
+## AI is a tool, not a substitute for understanding
 
-Een script laat zien wat er gebeurt.
+Modern AI tools such as ChatGPT, Claude, and Copilot are excellent assistants for writing code, explaining YAML, and brainstorming solutions.
 
-Je kunt iedere regel bekijken, begrijpen en aanpassen aan je eigen situatie. Daardoor leer je niet alleen hoe EntityGuard werkt, maar ook hoe Home Assistant zelf werkt.
+But ultimately, AI doesn't know your Home Assistant installation.
 
-Met een script kun je:
+It doesn't know:
 
-* begrijpen wat er gebeurt;
-* fouten opsporen;
-* optimaliseren;
-* uitbreiden;
-* experimenteren;
-* en nieuwe ideeën uitproberen.
+* how your Zigbee network behaves;
+* when your Wi-Fi introduces delays;
+* which devices occasionally miss a state update;
+* what exceptions exist in your automations;
+* or why one particular light always responds just a little slower than the others.
 
-Dat maakt je niet alleen gebruiker van Home Assistant, maar ook bouwer.
+Those insights only come from testing, measuring, tweaking, and trying again.
 
----
-
-## Uiteindelijk gaat het om plezier
-
-Home Assistant draait voor mij niet alleen om domotica, maar ook om nieuwsgierigheid.
-
-Het is leuk om te experimenteren, te testen, te bouwen en stap voor stap iets beter te maken.
-
-EntityGuard is vanuit die gedachte ontstaan.
-
-Niet als een gesloten oplossing die alles voor je doet, maar als een hulpmiddel dat je kunt begrijpen, aanpassen en verder ontwikkelen.
-
-Ik hoop dat het je niet alleen helpt om betrouwbaardere automatiseringen te bouwen, maar je ook inspireert om zelf verder te experimenteren.
+That's where the real strength of Home Assistant lies.
 
 ---
 
-# 👨‍💻 Auteur
+## Why I prefer scripts
+
+A script shows exactly what's happening.
+
+You can inspect every line, understand it, and adapt it to your own setup. In doing so, you learn not only how EntityGuard works, but also how Home Assistant itself works.
+
+A script allows you to:
+
+* understand what's happening;
+* troubleshoot problems;
+* optimize behavior;
+* extend functionality;
+* experiment;
+* explore new ideas.
+
+It turns you from a Home Assistant user into a Home Assistant builder.
+
+---
+
+## In the end, it's about having fun
+
+For me, Home Assistant is about more than home automation. It's about curiosity.
+
+Experimenting, testing, building, and improving things step by step is simply enjoyable.
+
+EntityGuard was created with exactly that mindset.
+
+Not as a closed solution that does everything for you, but as a tool you can understand, customize, and continue to develop.
+
+I hope it not only helps you build more reliable automations, but also inspires you to keep experimenting yourself.
+
+---
+
+# 👨‍💻 Author
 
 **Henk Hoekema**
 
-**Versie**
+**Version**
 
 `v2026.7.3`
 
@@ -299,12 +303,12 @@ Ik hoop dat het je niet alleen helpt om betrouwbaardere automatiseringen te bouw
 
 ---
 
-# 🤝 Bijdragen
+# 🤝 Contributing
 
-Home Assistant draait om samen bouwen en van elkaar leren. Ook ik heb niet alle wijsheid in pacht. Daarom zijn ideeën, verbeteringen, bugreports en pull requests altijd van harte welkom.
+Home Assistant thrives because people build, learn, and share together. I certainly don't have all the answers, so ideas, improvements, bug reports, and pull requests are always welcome.
 
 ---
 
-# 📄 Licentie
+# 📄 License
 
-Vrij te gebruiken, maar volledig op eigen risico.
+Free to use, but entirely at your own risk.
