@@ -294,6 +294,8 @@ Ik hoop dat het je niet alleen helpt om betrouwbaardere automatiseringen te bouw
 `v2026.7.3`
 
 [<img src="coffee.png" width="300">](https://paypal.me/henkhoekema)
+[![Venmo](https://img.shields.io/badge/Venmo-Supported-blue?style=for-the-badge)](https://paypal.me/henkhoekema)
+
 
 ---
 
