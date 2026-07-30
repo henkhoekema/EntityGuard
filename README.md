@@ -9,92 +9,44 @@
 > 🇬🇧 **English** (current page) • 🇳🇱 **[Nederlandse versie](Readme.nl.md)**
 
 
-# 🏠 EntityGuard
+# EntityGuard
 
-### Reliable Home Assistant Script
+EntityGuard is a Home Assistant script that I developed to make service calls more reliable.
 
-Over the past months, I developed a small script for Home Assistant.
+While building automations, I kept running into the same issue: Home Assistant sends a command to a device, but it doesn't verify whether the device actually performed the requested action. Sometimes a light stays off, a fan doesn't start, or a cover simply doesn't move.
 
-That script is called **EntityGuard**.
+EntityGuard solves that problem.
 
-Every Home Assistant user has experienced it at some point: you tell a device to do something, but for one reason or another... nothing happens. You tell a light, switch, or fan to turn on, yet it simply ignores the command.
+After every action, the script checks whether the desired state has been reached. If not, it automatically retries the action. You can configure the number of retries, the delay between attempts, and the backoff strategy. If the action ultimately fails, EntityGuard can send a notification and log all execution details for further analysis.
 
-Normally, Home Assistant assumes that once a service call has been sent, the job is done. Whether the device actually performed the requested action is not always verified.
-
-**EntityGuard** changes that.
-
-After every action, the script verifies that the device has actually reached the requested state. If it hasn't, EntityGuard automatically retries the action. It supports multiple retry attempts, configurable delays, and different backoff strategies between attempts.
-
-If the action still fails, EntityGuard can send a notification and records exactly what happened. Thanks to extensive logging, you can easily see which action was executed, how long it took, how many attempts were required, and why it ultimately failed.
-
-EntityGuard supports a wide range of Home Assistant domains, including lights, switches, fans, covers, locks, media players, scenes, and many more. Adding new domains or additional state checks is straightforward.
-
-In short: **EntityGuard makes sure Home Assistant doesn't give up when a device decides to be stubborn.** It is a flexible, highly configurable script designed to make your automations significantly more reliable.
+The script supports many Home Assistant domains and is easy to extend.
 
 ---
 
-# 📑 Contents
+## Features
 
-* [✨ Features](#-features)
-* [📦 Installation](#-installation)
-* [🧩 Supported Domains](#-supported-domains)
-* [⚙️ Parameters](#️-parameters)
-* [🚀 Example](#-example)
-* [📡 Logging](#-logging)
-* [💡 Use Cases](#-use-cases)
-* [👨‍💻 Author](#-author)
-* [📄 License](#-license)
+- Verifies that a device actually reached the requested state.
+- Automatically retries failed actions.
+- Supports multiple backoff strategies (`constant`, `linear`, and `exponential`).
+- Can send a notification when an action ultimately fails.
+- Fires an `entityguard_done` event containing execution details.
+- Ideal for logging, dashboards, statistics, and debugging.
 
 ---
 
-# ✨ Features
+## Installation
 
-✅ Executes an action on a supported entity
-
-✅ Verifies that the requested state has actually been reached
-
-✅ Automatically retries failed actions
-
-✅ Supports multiple backoff strategies
-
-* Linear
-* Constant
-* Exponential
-
-✅ Configurable **State Delay**
-
-✅ Optional notification when execution fails
-
-✅ Fires an `entityguard_done` event containing detailed results
-
-✅ Suitable for logging to:
-
-* Google Sheets
-* Dashboards
-* Grafana
-* Custom automations
-
-✅ Compatible with modern Home Assistant Actions (2026+)
-
----
-
-# 📦 Installation
-
-1. Copy the file to:
+1. Place the script in:
 
 ```text
 /config/scripts/
 ```
 
-2. Add the script to your `scripts.yaml`, or merge its contents into your existing script configuration.
+2. Add it to your `scripts.yaml` file or copy the contents into your existing scripts.
 
-3. Reload your scripts via:
+3. Reload your scripts via **Developer Tools → YAML Reloading**, or restart Home Assistant.
 
-> **Settings → Developer Tools → YAML Configuration Reloading → Scripts**
-
-or simply restart Home Assistant.
-
-After reloading, the script will be available as:
+The script will then be available as:
 
 ```text
 script.entityguard
@@ -102,55 +54,50 @@ script.entityguard
 
 ---
 
-# 🧩 Supported Domains
+## Supported Domains
 
-EntityGuard currently supports, among others:
+EntityGuard works with many Home Assistant domains, including:
 
-* switch
-* light
-* input_boolean
-* fan
-* group
-* homeassistant
-* scene
-* media_player
-* cover
-* lock
-* vacuum
-* climate
-* humidifier
-* dehumidifier
-* water_heater
-* alarm_control_panel
-
-Additional Home Assistant domains can easily be added.
+- `light`
+- `switch`
+- `fan`
+- `cover`
+- `lock`
+- `media_player`
+- `scene`
+- `climate`
+- `vacuum`
+- `humidifier`
+- `dehumidifier`
+- `water_heater`
+- `alarm_control_panel`
 
 ---
 
-# ⚙️ Parameters
+## Parameters
 
-| Parameter      | Description                              | Default  |
-| -------------- | ---------------------------------------- | -------- |
-| `description`  | Short description used for logging       | —        |
-| `entity_id`    | Target entity                            | —        |
-| `action`       | Action to execute (e.g. `light.turn_on`) | —        |
-| `data`         | Optional service data                    | `{}`     |
-| `retries`      | Maximum retry attempts                   | `3`      |
-| `timeout`      | Timeout per attempt                      | `15 sec` |
-| `retry_delay`  | Base delay between retries               | `5 sec`  |
-| `backoff_mode` | Linear / Constant / Exponential          | `linear` |
-| `state_delay`  | Delay before checking the state          | `2 sec`  |
-| `notify`       | Send notification if execution fails     | `true`   |
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `description` | Short description of the action | – |
+| `entity_id` | Target entity | – |
+| `action` | Service to execute | – |
+| `data` | Optional service data | `{}` |
+| `retries` | Maximum number of retry attempts | `3` |
+| `timeout` | Timeout per attempt | `15` sec |
+| `retry_delay` | Delay between retry attempts | `5` sec |
+| `backoff_mode` | `constant`, `linear`, or `exponential` | `linear` |
+| `state_delay` | Extra delay before state verification | `2` sec |
+| `notify` | Send notification on failure | `true` |
 
 ---
 
-# 🚀 Example
+## Example
 
 ```yaml
 action:
   - action: script.entityguard
     data:
-      description: "Living room light on"
+      description: Living room light on
       entity_id: light.erker_licht
       action: light.turn_on
       retries: 3
@@ -161,161 +108,54 @@ action:
 
 ---
 
-# 📡 Logging
+## Logging
 
-After every execution, EntityGuard automatically fires the following event:
+After every execution, EntityGuard fires an `entityguard_done` event containing information such as:
 
-```text
-entityguard_done
-```
+- `description`
+- `entity`
+- `action`
+- `result`
+- `duration`
+- `attempt`
+- `retries`
+- `timeout`
+- `state_delay`
+- `backoff_mode`
 
-The event includes, among others:
-
-| Variable       | Description                     |
-| -------------- | ------------------------------- |
-| `description`  | Action description              |
-| `entity`       | Target entity                   |
-| `action`       | Executed Home Assistant action  |
-| `result`       | OK or FAILED                    |
-| `duration`     | Total execution time            |
-| `attempt`      | Successful attempt number       |
-| `retries`      | Maximum retries configured      |
-| `timeout`      | Configured timeout              |
-| `state_delay`  | Delay before state verification |
-| `backoff_mode` | Backoff strategy used           |
-
-This information can easily be used for:
-
-* Google Sheets logging
-* Dashboards
-* Statistics
-* Debugging
-* Monitoring
-* Custom automations
+This makes it easy to build your own automations or use the data for dashboards, statistics, or troubleshooting.
 
 ---
 
-# 💡 Use Cases
+## Why a Script?
 
-EntityGuard is especially useful for automations where reliability matters:
+I deliberately chose to build EntityGuard as a script rather than a fully packaged integration.
 
-* Smart lighting
-* Roller shutters
-* Door locks
-* HVAC systems
-* Ventilation
-* Alarm systems
-* Pumps
-* Media equipment
-* Mission-critical automations
+A script is transparent: you can see exactly what it does, adapt it to your own setup, and learn from it at the same time. For me, that fits the philosophy of Home Assistant better than a "black box" integration where the inner workings are hidden.
 
 ---
 
-# 💭 Developer's Note
+## Download
 
-## Why EntityGuard is a script instead of a plug-and-play integration
+EntityGuard is available through Ko-fi.
 
-EntityGuard was intentionally designed as a **Home Assistant script**, not as a plug-and-play integration. Not because an integration isn't possible, but because I believe Home Assistant is more than a collection of ready-made solutions.
+👉 https://ko-fi.com/s/ab65ae7595
 
-To me, Home Assistant is a toolbox rather than an app store. Understanding your own automations is what makes the platform truly powerful.
-
-That's why EntityGuard is built as a tool—not a black box.
-
-With EntityGuard you can:
-
-* see exactly what happens;
-* understand the underlying logic;
-* modify the script;
-* extend it;
-* debug it;
-* improve it.
-
-A fully packaged integration would hide much of that. That doesn't fit the philosophy behind this project.
+You'll receive the complete script, including documentation with plenty of examples.
+Your support is greatly appreciated and helps me continue improving and expanding EntityGuard.
 
 ---
 
-## AI is a tool, not a substitute for understanding
-
-Modern AI tools such as ChatGPT, Claude, and Copilot are excellent assistants for writing code, explaining YAML, and brainstorming solutions.
-
-But ultimately, AI doesn't know your Home Assistant installation.
-
-It doesn't know:
-
-* how your Zigbee network behaves;
-* when your Wi-Fi introduces delays;
-* which devices occasionally miss a state update;
-* what exceptions exist in your automations;
-* or why one particular light always responds just a little slower than the others.
-
-Those insights only come from testing, measuring, tweaking, and trying again.
-
-That's where the real strength of Home Assistant lies.
-
----
-
-## Why I prefer scripts
-
-A script shows exactly what's happening.
-
-You can inspect every line, understand it, and adapt it to your own setup. In doing so, you learn not only how EntityGuard works, but also how Home Assistant itself works.
-
-A script allows you to:
-
-* understand what's happening;
-* troubleshoot problems;
-* optimize behavior;
-* extend functionality;
-* experiment;
-* explore new ideas.
-
-It turns you from a Home Assistant user into a Home Assistant builder.
-
----
-
-## In the end, it's about having fun
-
-For me, Home Assistant is about more than home automation. It's about curiosity.
-
-Experimenting, testing, building, and improving things step by step is simply enjoyable.
-
-EntityGuard was created with exactly that mindset.
-
-Not as a closed solution that does everything for you, but as a tool you can understand, customize, and continue to develop.
-
-I hope it not only helps you build more reliable automations, but also inspires you to keep experimenting yourself.
-
----
-
-# 👨‍💻 Author
+## Author
 
 **Henk Hoekema**
 
-**Version**
-
-`v2026.7.3`
-
-# ☕ Support & Download
-
-EntityGuard is available as a downloadable product on Ko‑fi.
-
-If you enjoy this project, want to support its development, or prefer a clean, ready‑to‑use version of the script, you can find it here:
-
-👉 **https://ko-fi.com/s/ab65ae7595**
-
-What do you get? A fully working script and a comprehensive manual with plenty of examples.
-Your support is greatly appreciated and helps me continue improving and expanding EntityGuard.
-
-
+Version: **v2026.7.3**
 
 ---
 
-# 🤝 Contributing
+## License
 
-Home Assistant thrives because people build, learn, and share together. I certainly don't have all the answers, so ideas, improvements, bug reports, and pull requests are always welcome.
+You are free to use and modify EntityGuard for personal use. Use it at your own risk.
 
----
 
-# 📄 License
-
-Free to use, but entirely at your own risk.
