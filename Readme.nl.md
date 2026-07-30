@@ -81,17 +81,15 @@ Kortom: **EntityGuard zorgt ervoor dat Home Assistant niet direct opgeeft wannee
 
 # 📦 Installatie
 
-1. Download het bestand `entityguard.yaml` uit deze repository.
-
-2. Plaats het bestand in de map:
+1. Plaats het bestand in de map:
 
 ```text
 /config/scripts/
 ```
 
-3. Voeg het script toe aan je `scripts.yaml`, of neem de inhoud op in je bestaande scriptconfiguratie.
+2. Voeg het script toe aan je `scripts.yaml`, of neem de inhoud op in je bestaande scriptconfiguratie.
 
-4. Herlaad de scripts via:
+3. Herlaad de scripts via:
 
 > **Settings → Developer tools → YAML configuration reloading → Scripts**
 
@@ -300,9 +298,17 @@ Ik hoop dat het je niet alleen helpt om betrouwbaardere automatiseringen te bouw
 
 `v2026.7.3`
 
-[<img src="coffee.png" width="300">](https://paypal.me/henkhoekema)
-[![Venmo](https://img.shields.io/badge/Venmo-Supported-blue?style=for-the-badge)](https://paypal.me/henkhoekema)
+# ☕ Ondersteuning & Download
 
+EntityGuard is als downloadbaar product beschikbaar op Ko‑fi.
+
+Vind je dit project waardevol, wil je de ontwikkeling ondersteunen, of gebruik je graag een nette, kant‑en‑klare versie van het script? Dan kun je het hier vinden:
+
+👉 **https://ko-fi.com/s/0a98a2c638**
+
+Wat krijg je? Een compleet werkend script en een uitgebreide handleiding met voldoende voorbeelden.
+
+Alle steun wordt enorm gewaardeerd en helpt om EntityGuard verder te verbeteren en uit te breiden.
 
 ---
 
@@ -315,3 +321,7 @@ Home Assistant draait om samen bouwen en van elkaar leren. Ook ik heb niet alle 
 # 📄 Licentie
 
 Vrij te gebruiken, maar volledig op eigen risico.
+
+
+
+
