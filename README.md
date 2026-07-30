@@ -80,17 +80,15 @@ In short: **EntityGuard makes sure Home Assistant doesn't give up when a device 
 
 # 📦 Installation
 
-1. Download `entityguard.yaml` from this repository.
-
-2. Copy the file to:
+1. Copy the file to:
 
 ```text
 /config/scripts/
 ```
 
-3. Add the script to your `scripts.yaml`, or merge its contents into your existing script configuration.
+2. Add the script to your `scripts.yaml`, or merge its contents into your existing script configuration.
 
-4. Reload your scripts via:
+3. Reload your scripts via:
 
 > **Settings → Developer Tools → YAML Configuration Reloading → Scripts**
 
@@ -297,8 +295,17 @@ I hope it not only helps you build more reliable automations, but also inspires 
 
 `v2026.7.3`
 
-[<img src="coffee.png" width="300">](https://paypal.me/henkhoekema)
-[![Venmo](https://img.shields.io/badge/Venmo-Supported-blue?style=for-the-badge)](https://paypal.me/henkhoekema)
+# ☕ Support & Download
+
+EntityGuard is available as a downloadable product on Ko‑fi.
+
+If you enjoy this project, want to support its development, or prefer a clean, ready‑to‑use version of the script, you can find it here:
+
+👉 **https://ko-fi.com/s/ab65ae7595**
+
+What do you get? A fully working script and a comprehensive manual with plenty of examples.
+Your support is greatly appreciated and helps me continue improving and expanding EntityGuard.
+
 
 
 ---
