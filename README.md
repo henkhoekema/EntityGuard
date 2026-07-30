@@ -13,7 +13,7 @@
 
 ### Reliable Home Assistant Script
 
-Over the past months, I developed a small script for Home Assistant. You have to keep yourself busy somehow. 😉
+Over the past months, I developed a small script for Home Assistant.
 
 That script is called **EntityGuard**.
 
