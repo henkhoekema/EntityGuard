@@ -138,12 +138,11 @@ Voor mij sluit deze aanpak aan bij de manier waarop ik Home Assistant graag gebr
 
 ## Download
 
-EntityGuard is verkrijgbaar via Ko-fi.
+Met EntityGuard wil ik niet alleen de Home Assistant-community helpen, maar ook een goed doel steunen. Daarom vraag ik geen vaste verkoopprijs, maar een kleine donatie via Ko-fi. De volledige opbrengst gaat naar KWF Kankerbestrijding. Deze repository bevat de documentatie, voorbeelden en issue tracking voor het project.
 
 👉 https://ko-fi.com/s/0a98a2c638
 
 Je ontvangt het complete script, inclusief documentatie met tal van voorbeelden.
-Je steun wordt zeer gewaardeerd en helpt me EntityGuard verder te verbeteren en uit te breiden.
 
 ---
 
