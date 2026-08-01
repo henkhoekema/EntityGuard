@@ -139,7 +139,9 @@ The script is transparent: you can see exactly what it does, adapt it to your ow
 
 With EntityGuard, I hope to contribute not only to the Home Assistant community, but also to a good cause. Instead of charging a fixed price, I simply ask for a small donation through Ko-fi. All proceeds are donated to the Dutch Cancer Society (KWF Kankerbestrijding). This repository contains the project's documentation, examples, and issue tracker.
 
-👉 https://ko-fi.com/s/ab65ae7595
+The latest version of EntityGuard can be downloaded via Ko-fi.
+
+📥 **[Download EntityGuard via Ko-fi](https://ko-fi.com/s/ab65ae7595)**
 
 You'll receive the complete script, including documentation with plenty of examples.
 
