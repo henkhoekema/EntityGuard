@@ -137,7 +137,7 @@ The script is transparent: you can see exactly what it does, adapt it to your ow
 
 ## Download
 
-EntityGuard is available through Ko-fi.
+EntityGuard is my way of supporting a good cause. Instead of selling the script, I ask for a small donation via Ko-fi. All proceeds are donated to the Dutch Cancer Society (KWF Kankerbestrijding). This repository contains documentation, examples, and issue tracking.
 
 👉 https://ko-fi.com/s/ab65ae7595
 
