@@ -131,8 +131,8 @@ Hiermee kun je eenvoudig eigen automatiseringen bouwen of gegevens gebruiken voo
 
 Ik heb er bewust voor gekozen om EntityGuard als script te bouwen en niet als een volledig verpakte integratie.
 
-Een script is transparant: je kunt precies zien wat er gebeurt, het aanpassen aan je eigen wensen en er tegelijkertijd van leren.
-Voor mij past dat beter bij de filosofie van Home Assistant dan een "black box" waar je niets van ziet.
+Het script is transparant: je kunt precies zien wat er gebeurt, het aanpassen aan je eigen wensen en er tegelijkertijd van leren.
+Voor mij sluit deze aanpak aan bij de manier waarop ik Home Assistant graag gebruik: transparant, begrijpelijk en eenvoudig aan te passen.
 
 ---
 
