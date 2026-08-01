@@ -131,7 +131,7 @@ This makes it easy to build your own automations or use the data for dashboards,
 
 I deliberately chose to build EntityGuard as a script rather than a fully packaged integration.
 
-A script is transparent: you can see exactly what it does, adapt it to your own setup, and learn from it at the same time. For me, that fits the philosophy of Home Assistant better than a "black box" integration where the inner workings are hidden.
+The script is transparent: you can see exactly what it does, adapt it to your own setup, and learn from it at the same time. For me, this approach fits the way I like to use Home Assistant: transparent, easy to understand, and easy to modify.
 
 ---
 
