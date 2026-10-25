@@ -1,7 +1,5 @@
 ![Home Assistant](https://img.shields.io/badge/Home%20Assistant-2026%2B-blue.svg)
 ![Script](https://img.shields.io/badge/Home%20Assistant-Script-success.svg)
-![License](https://img.shields.io/badge/License-Community-green.svg)
-
 
 > [!TIP]
 > **De documentatie van EntityGuard is beschikbaar in twee talen.**
