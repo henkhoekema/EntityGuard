@@ -1,7 +1,5 @@
 ![Home Assistant](https://img.shields.io/badge/Home%20Assistant-2026%2B-blue.svg)
 ![Script](https://img.shields.io/badge/Home%20Assistant-Script-success.svg)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
-
 
 > [!TIP]
 > **EntityGuard documentation is available in two languages.**
@@ -155,8 +153,14 @@ Version: **v2026.7.3**
 
 ---
 
-## License
+## License and Terms of Use
 
-You are free to use and modify EntityGuard for personal use. Use it at your own risk.
+This automation may be freely used and modified for personal use.
+
+When publishing, distributing, or sharing this automation, or modified versions based wholly or partially on it, attribution to the original author is required. Where reasonably possible, a reference to the original repository must also be included.
+
+This automation and any derivative versions may not be presented as entirely original work without acknowledging the original author.
+
+This automation is provided without any warranty. Its use and modification are entirely at the user's own risk. To the extent permitted by applicable law, the author accepts no liability for any damage arising from the use or modification of this automation.
 
 
