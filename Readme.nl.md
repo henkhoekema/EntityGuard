@@ -156,9 +156,15 @@ Versie: **v2026.7.3**
 
 ---
 
-## Licentie
+## Licentie en gebruiksvoorwaarden
 
-Je bent vrij om EntityGuard te gebruiken en aan te passen voor eigen gebruik. Gebruik is volledig op eigen risico.
+Deze automatisering mag vrij worden gebruikt en aangepast voor eigen gebruik.
+
+Bij het publiceren, verspreiden of delen van deze deze automatisering, of van geheel of gedeeltelijk daarop gebaseerde aangepaste versies, is bronvermelding verplicht. Daarbij moet de oorspronkelijke auteur worden vermeld en moet, waar redelijkerwijs mogelijk, een verwijzing naar de oorspronkelijke repository worden opgenomen.
+
+Het is niet toegestaan deze automatisering of afgeleide versies als volledig eigen oorspronkelijk werk te presenteren zonder de oorspronkelijke auteur te erkennen.
+
+Deze automatisering wordt aangeboden zonder enige garantie. Gebruik en aanpassing geschieden op eigen risico. Voor zover wettelijk toegestaan aanvaardt de auteur geen aansprakelijkheid voor schade die voortvloeit uit het gebruik of de aanpassing ervan.
 
 
 
